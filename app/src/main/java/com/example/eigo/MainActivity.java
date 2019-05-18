@@ -40,16 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
-        if(lang == 0){
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,Locale.JAPAN.toString());
+        if(lang == 0) {
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH.toString());
 
         }
-        else if (lang == 1){
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,Locale.ENGLISH.toString());
-        }
-        else if (lang == 2){
-            intent.putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE,true);
-        }
+
 
         else{
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -57,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,100);
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"音声を入力");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Speech!");
 
         try {
 
