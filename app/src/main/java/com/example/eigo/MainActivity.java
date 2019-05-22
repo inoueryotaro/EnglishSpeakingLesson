@@ -13,18 +13,18 @@ import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    // リクエストを認識するための変数宣言。適当な数字でいい
     private static final int REQUEST_CODE = 1000;
     private TextView textView;
 
-    private int lang;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lang = 0;
+
 
         textView = (TextView)findViewById(R.id.text_view);
 
@@ -37,27 +37,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void speech(){
-
+        //音声認識プロンプトを立ち上げるインテント作成
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
-        if(lang == 0) {
+
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH.toString());
-
-        }
-        else{
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        }
-
-        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,100);
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Speech!");
+            intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,100);
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Speech!");
 
         try {
-
+        //インテント発行
             startActivityForResult(intent, REQUEST_CODE);
 
         }
         catch (ActivityNotFoundException e){
+            //エラー表示
             e.printStackTrace();
             textView.setText(R.string.error);
         }
