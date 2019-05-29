@@ -9,17 +9,38 @@
 
     <TextView
         android:id="@+id/text_view"
-        android:text="@string/text"
-        android:textSize="30sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/text_view3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="                     Recycling"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/text_view2"
+        android:layout_width="match_parent"
+        android:layout_height="312dp"
+        android:text="These days, recycling is becoming common in people's daily lives. Most towns and cities collect cans and plastic bottles for recycling. Many families use products made from recycled paper, and in this way,  they try to make the environment better. It is becomming more important to take care of the environment."
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/button_start"
-        android:text="@string/button"
-        android:layout_margin="30dp"
-        android:textSize="30sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="話す"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/button_start2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="読み上げ"
+        android:textSize="30dp" />
 
 </LinearLayout>
