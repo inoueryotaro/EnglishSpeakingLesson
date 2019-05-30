@@ -11,9 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Locale;
-import android.app.Activity;
-import java.util.Queue;
-import android.text.SpannableStringBuilder;
+
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
@@ -27,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextToSpeech tts;
     private static final String TAG = "TestTTS";
 
+    public static final String EXTRA_MESSAGE
+            ="com.example.eigo.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tts = new TextToSpeech(this,this);
 
-        textView = (TextView)findViewById(R.id.text_view);
+        textView = (TextView)findViewById(R.id.text_view4);
         Button buttonStart = (Button)findViewById(R.id.button_start);
         buttonStart.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         Button ttsButton = findViewById(R.id.button_start2);
         ttsButton.setOnClickListener(this);
-
     }
+
     public void onInit(int status) {
         // TTS初期化
         if (TextToSpeech.SUCCESS == status) {
@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,100);
             intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Speech!");
 
+
         try {
         //インテント発行
             startActivityForResult(intent, REQUEST_CODE);
@@ -178,6 +179,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textView.setText( candidates.get(0));
             }
         }
+        Intent intent1 = new Intent(getApplication(),ResultActivity.class);
+        if (textView.getText() != null){
+            String str = textView.getText().toString();
+            intent1.putExtra(EXTRA_MESSAGE,str);
+        }
+        startActivity(intent1);
+        textView.setText("");
     }
 }
 
