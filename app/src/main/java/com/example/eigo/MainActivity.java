@@ -16,6 +16,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 import java.util.HashMap;
+import android.widget.Toast;
 
 import android.os.Vibrator;
 import android.speech.RecognitionListener;
@@ -23,6 +24,7 @@ import android.speech.SpeechRecognizer;
 
 public  class MainActivity extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener {
     // リクエストを認識するための変数宣言。適当な数字でいい
+    private SpeechRecognizer sr;
     private static final int REQUEST_CODE = 1000;
     private TextView textView;
     private TextToSpeech tts;
@@ -151,43 +153,175 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
 
     private void speech() {
         //音声認識プロンプトを立ち上げるインテント作成
+
+
         try{
+            if (sr == null){
+                sr = SpeechRecognizer.createSpeechRecognizer(this);
+                if (!SpeechRecognizer.isRecognitionAvailable(getApplicationContext())) {
+                    Toast.makeText(getApplicationContext(), "音声認識が使えません",
+                            Toast.LENGTH_LONG).show();
+                    finish();
+                }
+                sr.setRecognitionListener(new listener());
+            }
          Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
          intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH.toString());
         intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,100);
+            sr.startListening(intent);
         //インテント発行
-         startActivityForResult(intent, REQUEST_CODE);
+        // startActivityForResult(intent, REQUEST_CODE);
 
-        }catch (ActivityNotFoundException e){
+        }catch (Exception ex){
         //エラー表示
-          e.printStackTrace();
-         textView.setText(R.string.error);
+            Toast.makeText(getApplicationContext(), "startListening()でエラーが起こりました",
+                    Toast.LENGTH_LONG).show();
+            finish();
+          //e.printStackTrace();
+         //textView.setText(R.string.error);
         }
     }
+    protected void stopListening() {
+        if (sr != null) sr.destroy();
+        sr = null;
+    }
+    //public void restartListeningService() {
+      //  stopListening();
+        //speech();
+    //}
+    //protected void onResume() {
+      //  super.onResume();
+        //speech();
+    //}
+    //protected void onPause() {
+      //  stopListening();
+       // super.onPause();
+   // }
 
-        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-              super.onActivityResult(requestCode, resultCode, data);
 
-            if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+  //            super.onActivityResult(requestCode, resultCode, data);
+
+    //        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             // 認識結果を ArrayList で取得
-              ArrayList<String> candidates =
-                    data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+      //        ArrayList<String> candidates =
+        //            data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
-            if(candidates.size() > 0) {
+          //  if(candidates.size() > 0) {
             // 認識結果候補で一番有力なものを表示
-              textView.setText( candidates.get(0));
+            //  textView.setText( candidates.get(0));
+            //}
+             //}
+            //Intent intent1 = new Intent(getApplication(), ResultActivity.class);
+            //if (textView.getText() != null) {
+              //  String str = textView.getText().toString();
+                //intent1.putExtra(EXTRA_MESSAGE, str);
+           // }
+            //startActivity(intent1);
+        //    textView.setText("");
+        //}
+
+
+    private class listener implements RecognitionListener {
+        public void onBeginningOfSpeech() {
+            /*Toast.makeText(getApplicationContext(), "onBeginningofSpeech",
+                    Toast.LENGTH_SHORT).show();*/
+        }
+        public void onBufferReceived(byte[] buffer) {
+        }
+        public void onEndOfSpeech() {
+            /*Toast.makeText(getApplicationContext(), "onEndofSpeech",
+                    Toast.LENGTH_SHORT).show();*/
+        }
+        public void onError(int error) {
+            String reason = "";
+            switch (error) {
+                // Audio recording error
+                case SpeechRecognizer.ERROR_AUDIO:
+                    reason = "ERROR_AUDIO";
+                    break;
+                // Other client side errors
+                case SpeechRecognizer.ERROR_CLIENT:
+                    reason = "ERROR_CLIENT";
+                    break;
+                // Insufficient permissions
+                case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
+                    reason = "ERROR_INSUFFICIENT_PERMISSIONS";
+                    break;
+                // 	Other network related errors
+                case SpeechRecognizer.ERROR_NETWORK:
+                    reason = "ERROR_NETWORK";
+                    /* ネットワーク接続をチェックする処理をここに入れる */
+                    break;
+                // Network operation timed out
+                case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
+                    reason = "ERROR_NETWORK_TIMEOUT";
+                    break;
+                // No recognition result matched
+                case SpeechRecognizer.ERROR_NO_MATCH:
+                    reason = "ERROR_NO_MATCH";
+                    break;
+                // RecognitionService busy
+                case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
+                    reason = "ERROR_RECOGNIZER_BUSY";
+                    break;
+                // Server sends error status
+                case SpeechRecognizer.ERROR_SERVER:
+                    reason = "ERROR_SERVER";
+                    /* ネットワーク接続をチェックをする処理をここに入れる */
+                    break;
+                // No speech input
+                case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
+                    reason = "ERROR_SPEECH_TIMEOUT";
+                    break;
             }
-             }
+            Toast.makeText(getApplicationContext(), reason, Toast.LENGTH_SHORT).show();
+      //      restartListeningService();
+        }
+        public void onEvent(int eventType, Bundle params) {
+        }
+
+        // 部分的な認識結果が利用出来るときに呼ばれる
+        // 利用するにはインテントでEXTRA_PARTIAL_RESULTSを指定する必要がある
+        public void onPartialResults(Bundle partialResults) {
+        }
+        public void onReadyForSpeech(Bundle params) {
+            Toast.makeText(getApplicationContext(), "話してください",
+                    Toast.LENGTH_SHORT).show();
+        }
+        public void onResults(Bundle results) {
+            // 結果をArrayListとして取得
+            //ArrayList<String> candidates =
+                    //            data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+                    //  if(candidates.size() > 0) {
+                    // 認識結果候補で一番有力なものを表示
+                    //  textView.setText( candidates.get(0));
+            ArrayList<String> results_array = results.getStringArrayList(
+                    SpeechRecognizer.RESULTS_RECOGNITION);
+                        // 取得した文字列を結合
+            String resultsString = "";
+            for (int i = 0; i < results.size(); i++) {
+                resultsString += results_array.get(i) + ";";
+            }
+            // トーストを使って結果表示
+            if (results_array.size() > 0){
+            textView.setText(results_array.get(0));}
+            //Toast.makeText(getApplicationContext(), resultsString, Toast.LENGTH_LONG).show();
             Intent intent1 = new Intent(getApplication(), ResultActivity.class);
             if (textView.getText() != null) {
-                String str = textView.getText().toString();
-                intent1.putExtra(EXTRA_MESSAGE, str);
-            }
+              String str = textView.getText().toString();
+            intent1.putExtra(EXTRA_MESSAGE, str);
+             }
             startActivity(intent1);
-            textView.setText("");
+                textView.setText("");
+        //    restartListeningService();
+        }
+        public void onRmsChanged(float rmsdB) {
         }
 
 
     }
+}
 
 
