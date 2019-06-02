@@ -30,7 +30,6 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
 
     public static final String EXTRA_MESSAGE
             = "com.example.eigo.MESSAGE";
-    private SpeechRecognizer mSpeechRecognizer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -152,20 +151,10 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
 
     private void speech() {
         //音声認識プロンプトを立ち上げるインテント作成
-          
-
+        try{
          Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-
-
-
-
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH.toString());
+         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH.toString());
         intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,100);
-         intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Speech!");
-
-
-
-         try {
         //インテント発行
          startActivityForResult(intent, REQUEST_CODE);
 
@@ -175,6 +164,7 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
          textView.setText(R.string.error);
         }
     }
+
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {
               super.onActivityResult(requestCode, resultCode, data);
 
