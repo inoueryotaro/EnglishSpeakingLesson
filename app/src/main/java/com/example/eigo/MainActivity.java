@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,9 +22,10 @@ import android.widget.Toast;
 import android.os.Vibrator;
 import android.speech.RecognitionListener;
 import android.speech.SpeechRecognizer;
-
 public  class MainActivity extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener {
     // リクエストを認識するための変数宣言。適当な数字でいい
+
+
     private SpeechRecognizer sr;
     private static final int REQUEST_CODE = 1000;
     private TextView textView;
@@ -32,7 +34,6 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
 
     public static final String EXTRA_MESSAGE
             = "com.example.eigo.MESSAGE";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
         });
         Button ttsButton = findViewById(R.id.button_start2);
         ttsButton.setOnClickListener(this);
+
 
     }
 
@@ -322,6 +324,7 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
+
 }
 
 

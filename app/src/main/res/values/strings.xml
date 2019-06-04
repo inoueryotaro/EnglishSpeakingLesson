@@ -3,4 +3,7 @@
     <string name="error">No Activity</string>
     <string name="text">Test</string>
     <string name="button">Speech</string>
+    <string name="top_text">TOPPAGE</string>
+    <string name="yomiage">YOMIAGE</string>
+    <string name="hint">text</string>
 </resources>

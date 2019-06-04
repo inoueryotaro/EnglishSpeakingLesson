@@ -14,6 +14,15 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
+        Button button2 = findViewById(R.id.yomiage_button);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(getApplication(), ResultActivity2.class);
+                startActivity(intent2);
+            }
+        });
+
         Intent intent1 = getIntent();
         message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
