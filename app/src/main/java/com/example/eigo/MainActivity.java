@@ -12,6 +12,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.io.IOException;
+import android.app.Activity;
+import android.media.MediaRecorder;
+import android.os.Bundle;
+
 
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
@@ -34,6 +39,9 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
 
     public static final String EXTRA_MESSAGE
             = "com.example.eigo.MESSAGE";
+ //   MediaRecorder recorder = null;
+  //  final static String FILENAME = "/Users/inoue/Desktop/test.3gp";
+   // boolean bIsRecording = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,8 +161,43 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
         shutDown();
     }
 
+
     private void speech() {
         //音声認識プロンプトを立ち上げるインテント作成
+     //   recorder = new MediaRecorder();
+      //  recorder.setOutputFile(FILENAME);
+
+        //    if (!bIsRecording) {
+// 入力ソースの指定
+        //recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        //recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        //recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        //try {
+            // 録音準備
+        //recorder.prepare();
+          //  } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            //    e.printStackTrace();
+            //} catch (IOException e) {
+              //  // TODO Auto-generated catch block
+                //    e.printStackTrace();
+                  //  }
+                    // 録音開始
+                    //recorder.start();
+                  //  btn.setText(R.string.stop_label);
+                    //bIsRecording = true;
+                   // }
+                //else {
+                    // 録音停止
+                  //  recorder.stop();
+                    //recorder.reset();
+                    //
+                // btn.setText(R.string.start_label);
+                    //bIsRecording = false;
+                //}
+
+
+
 
 
         try{
@@ -182,7 +225,11 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
           //e.printStackTrace();
          //textView.setText(R.string.error);
         }
+
+
     }
+
+
     protected void stopListening() {
         if (sr != null) sr.destroy();
         sr = null;
@@ -322,8 +369,9 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
         public void onRmsChanged(float rmsdB) {
         }
 
-
     }
+
+
 
 }
 
