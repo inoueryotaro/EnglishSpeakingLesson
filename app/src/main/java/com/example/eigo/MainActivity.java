@@ -39,6 +39,7 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
 
     public static final String EXTRA_MESSAGE
             = "com.example.eigo.MESSAGE";
+
  //   MediaRecorder recorder = null;
   //  final static String FILENAME = "/Users/inoue/Desktop/test.3gp";
    // boolean bIsRecording = false;
@@ -358,12 +359,13 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
             textView.setText(results_array.get(0));}
             //Toast.makeText(getApplicationContext(), resultsString, Toast.LENGTH_LONG).show();
             Intent intent1 = new Intent(getApplication(), ResultActivity.class);
+
             if (textView.getText() != null) {
               String str = textView.getText().toString();
             intent1.putExtra(EXTRA_MESSAGE, str);
              }
             startActivity(intent1);
-                textView.setText("");
+            textView.setText("");
         //    restartListeningService();
         }
         public void onRmsChanged(float rmsdB) {

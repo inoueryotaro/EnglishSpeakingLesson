@@ -25,7 +25,7 @@
         android:id="@+id/text_view2"
         android:layout_width="match_parent"
         android:layout_height="312dp"
-        android:text="These days, recycling is becoming common in people's daily lives. Most towns and cities collect cans and plastic bottles for recycling. Many families use products made from recycled paper, and in this way,  they try to make the environment better. It is becomming more important to take care of the environment."
+        android:text="it is becoming more important to take care of the environment"
         android:textSize="24sp"
         android:textIsSelectable="true"/>
 
