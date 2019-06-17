@@ -45,18 +45,18 @@ public class ResultActivity extends AppCompatActivity {
             if (tango[i].equals(messagetango[i])) {
 
             } else {
-                answer += tango[i];
+                answer += messagetango[i];
                 answer += " ";
                 count++;
             }
         }
-        textView.setText(mondaibun);
+        textView.setText(message);
         if (answer != "") {
             String[] answer_tango = answer.split(" ", -1);
-            SpannableStringBuilder ssb = new SpannableStringBuilder(mondaibun);
+            SpannableStringBuilder ssb = new SpannableStringBuilder(message);
             for( int j = 0; j < count; j++) {
-                if (mondaibun.contains(answer_tango[j])) {
-                    int index = mondaibun.indexOf(answer_tango[j]);
+                if (message.contains(answer_tango[j])) {
+                    int index = message.indexOf(answer_tango[j]);
                     ssb.setSpan(new ForegroundColorSpan(spanColor), index, index+answer_tango[j].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     textView.setText(ssb);
                 }
@@ -64,12 +64,12 @@ public class ResultActivity extends AppCompatActivity {
         }
 
             TextView textview2 = findViewById(R.id.resultLabel);
-            textview2.setText(message);
-           // if (mondaibun.equals(message)) {
-             //   textview2.setText("正解です!");
-            //} else {
-              //  textview2.setText("不正解です！");
-            //}
+            //textview2.setText(message);
+           if (mondaibun.equals(message)) {
+                textview2.setText("正解です!");
+            } else {
+                textview2.setText("不正解です！");
+            }
 
             Button button = findViewById(R.id.back_button);
             button.setOnClickListener(new View.OnClickListener() {
