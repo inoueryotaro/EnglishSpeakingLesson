@@ -18,14 +18,14 @@
         android:id="@+id/text_view3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="                     Recycling"
+        android:text="                     "
         android:textSize="24sp" />
 
     <TextView
         android:id="@+id/text_view2"
         android:layout_width="match_parent"
         android:layout_height="312dp"
-        android:text="it is becoming more important to take care of the environment"
+        android:text="recycling is becoming common in people's daily lives"
         android:textSize="24sp"
         android:textIsSelectable="true"/>
 

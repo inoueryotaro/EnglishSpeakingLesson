@@ -34,7 +34,7 @@ public class ResultActivity extends AppCompatActivity {
         String[] messagetango = message.split(" ", -1);
 
         // EditTextからテキストを取得
-        String mondaibun = "it is becoming more important to take care of the environment";
+        String mondaibun = "recycling is becoming common in people's daily lives";
         String[] tango = mondaibun.split(" ", -1);
 
         TextView textView = findViewById(R.id.text_view5);
