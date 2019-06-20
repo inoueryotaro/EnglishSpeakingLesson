@@ -31,6 +31,7 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent1 = getIntent();
         String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
         //受け取った文章を単語に分割する
+        message = message.replaceAll(",","");
         String[] messagetango = message.split(" ", -1);
 
         // EditTextからテキストを取得
@@ -41,32 +42,66 @@ public class ResultActivity extends AppCompatActivity {
         String answer = "";
         int count = 0;
         int spanColor = Color.RED;
-        for (int i = 0; i < messagetango.length; i++) {
-            if (tango[i].equals(messagetango[i])) {
 
-            } else {
+            for( int i = 0; i < messagetango.length; i++ )
+            {
+                for ( int j = 0; j < tango.length; j++)
+                {
+                    if( messagetango[i].equals(tango[j]))
+                    {
+                        messagetango[i] = "-";
+                        tango[j] = "-";
+                        break;
+                    }
+                }
+
                 answer += messagetango[i];
                 answer += " ";
                 count++;
             }
-        }
-        textView.setText(message);
-        if (answer != "") {
-            String[] answer_tango = answer.split(" ", -1);
+
+
+
+
+            textView.setText(message);
+            if (answer != "") {
+              String[] answer_tango = answer.split(" ", -1);
             SpannableStringBuilder ssb = new SpannableStringBuilder(message);
             for( int j = 0; j < count; j++) {
-                if (message.contains(answer_tango[j])) {
-                    int index = message.indexOf(answer_tango[j]);
-                    ssb.setSpan(new ForegroundColorSpan(spanColor), index, index+answer_tango[j].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    textView.setText(ssb);
-                }
+              if (message.contains(answer_tango[j])) {
+                int index = message.indexOf(answer_tango[j]);
+              ssb.setSpan(new ForegroundColorSpan(spanColor), index, index+answer_tango[j].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+             textView.setText(ssb);
             }
-        }
+            }
+            }
+
+       // for (int i = 0; i < messagetango.length; i++) {
+         //   if (tango[i].equals(messagetango[i])) {
+
+           // } else {
+             //   answer += messagetango[i];
+              //  answer += " ";
+               // count++;
+           // }
+        //}
+        //textView.setText(message);
+        //if (answer != "") {
+          //  String[] answer_tango = answer.split(" ", -1);
+            //SpannableStringBuilder ssb = new SpannableStringBuilder(message);
+            //for( int j = 0; j < count; j++) {
+              //  if (message.contains(answer_tango[j])) {
+                //    int index = message.indexOf(answer_tango[j]);
+                  //  ssb.setSpan(new ForegroundColorSpan(spanColor), index, index+answer_tango[j].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                   // textView.setText(ssb);
+                //}
+            //}
+        //}
 
             TextView textview2 = findViewById(R.id.resultLabel);
             //textview2.setText(message);
            if (mondaibun.equals(message)) {
-                textview2.setText("正解です!");
+               textview2.setText("正解です!");
             } else {
                 textview2.setText("不正解です！");
             }
