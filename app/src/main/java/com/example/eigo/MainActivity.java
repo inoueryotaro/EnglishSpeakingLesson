@@ -212,8 +212,9 @@ public  class MainActivity extends AppCompatActivity implements View.OnClickList
                 sr.setRecognitionListener(new listener());
             }
          Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
          intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH.toString());
-        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,100);
+        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,1);
             sr.startListening(intent);
         //インテント発行
         // startActivityForResult(intent, REQUEST_CODE);
