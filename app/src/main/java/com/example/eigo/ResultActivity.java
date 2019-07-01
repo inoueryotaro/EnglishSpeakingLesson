@@ -31,13 +31,13 @@ public class ResultActivity extends AppCompatActivity {
         //データを受け取る
         Intent intent1 = getIntent();
         //String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        String message = "applet is god";
+        String message = "ara";
         //受け取った文章を単語に分割する
         message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", -1);
 
         // EditTextからテキストを取得
-        String mondaibun = "apple is good";
+        String mondaibun = "saka";
         String[] tango = mondaibun.split(" ", -1);
         String answer = "";
         int count = 0;
@@ -46,13 +46,20 @@ public class ResultActivity extends AppCompatActivity {
             String LevensteinDistance(String array_left, String array_right) {
                 int array_[][] = new int[array_left.length() + 1][array_right.length() + 1];
                 int x = 0;
-                String inoue = "";
                 String[] left = array_left.split("");
                 String[] right = array_right.split("");
-                int left_point = 0;
-                int right_point = 0;
-                int left_right = 0;
-                int minimum = 0;
+                //textView.setText(left[2]);
+                //textView.setText(left[1]);
+                int COST_DEL = 1;
+                int COST_INS = 1;
+                int COST_SUB = 1;
+                int c_del = 0;
+                int c_ins = 0;
+                int c_sub = 0;
+                int c_match = 0;
+                int inoue = 0;
+                int inoue2 = 0;
+                int inoue3 = 0;
                 for (int i = 0; i < array_left.length() + 1; i++) {
                     array_[i][0] = i;
                 }
@@ -61,15 +68,29 @@ public class ResultActivity extends AppCompatActivity {
                 }
                 //String value = String.valueOf(array_[-1][0]);
                 //textView.setText(value);
-                for (int i = 1; i < array_left.length() + 1; i++) {
+               for (int i = 1; i < array_left.length() + 1; i++) {
                     for (int j = 1; j < array_right.length() + 1; j++) {
-                        left_point = array_[i - 1][j] + 1;
-                        right_point = array_[i][j - 1] + 1;
-                        x = (left[i - 1].equals(right[j - 1])) ? 0 : 1;
-                        left_right = array_[i - 1][j - 1] + x;
-                        int min1 = Math.min(left_point, right_point);
-                        minimum = Math.min(min1, left_right);
-                        array_[i][j] = minimum;
+                        c_del = array_[i-1][j] + COST_DEL;
+                        c_ins = array_[i][j-1] + COST_INS;
+                        c_sub = array_[i-1][j-1] + COST_SUB;
+                        if( left[i].equals(right[j])){
+                            x = 0;
+                        }
+                        else{
+                            x = 1;
+                        }
+                        c_match =  array_[i-1][j-1] + x;
+                        inoue = Math.min(c_del,c_ins);
+                        inoue2 = Math.min(c_match,c_sub);
+                        inoue3 = Math.min(inoue,inoue2);
+                        array_[i][j] =  inoue3;
+                        //left_point = array_[i - 1][j] + 1;
+                        //right_point = array_[i][j - 1] + 1;
+                        //x = (left[i - 1].equals(right[j - 1])) ? 0 : 1;
+                        //left_right = array_[i - 1][j - 1] + x;
+                        //int min1 = Math.min(left_point, right_point);
+                        //minimum = Math.min(min1, left_right);
+                        //array_[i][j] = minimum;
                     }
                 }
 
@@ -78,40 +99,71 @@ public class ResultActivity extends AppCompatActivity {
                 int score_naname = 0;
                 int position_left = array_left.length();
                 int position_right = array_right.length();
-                int score = array_[position_left][position_right];
+                //positon_left == 14 textView.setText(String.valueOf(position_left));
+                //position_right == 14 textView.setText(String.valueOf(position_right));
+                //textView.setText(left[position_left]);
+                int score = 0;
                 int j = 0;
                 String seikai = "";
                 //int[] seikai;
                 //seikai = new int[position_right];
-                for (int i = 1; i < array_left.length() * array_right.length(); i++) {
+                for (int i = 0; i < array_left.length() * array_right.length(); i++) {
                     if (position_left == 0 || position_right == 0) {
                         break;
                     }
                     score_left = array_[position_left][position_right - 1];
                     score_up = array_[position_left - 1][position_right];
                     score_naname = array_[position_left - 1][position_right - 1];
-                    if (score_up <= score_naname && score_up <= score_left && score > score_up) {
-                        position_left = position_left - 1;
-                        position_right = position_right;
-                        if (score > score_up) {
-                            seikai += right[position_right - 1];
-                        }
+
                         score = array_[position_left][position_right];
-                    } else if (score_left <= score_naname && score_left <= score_up && score > score_left) {
+                        seikai += String.valueOf(score);
+                        seikai += " ";
+                        seikai += String.valueOf(position_left);
+                        seikai += String.valueOf(position_right);
+                        seikai += " ";
+                        seikai += left[position_left];
+                        seikai += right[position_right];
+                      if (score_naname <= score_left && score_naname <= score_up && score >= score_naname) {
+                        position_left = position_left - 1;
+                        position_right = position_right - 1;
+                        //if (score > score_naname) {
+                        //  seikai += right[position_right];
+                        seikai += "naname";
+                        seikai += " ";
+                        //if( score > score_naname){
+                        //    seikai += right[position_right];
+                        //    seikai += " ";
+                       // }
+                        //}
+                        score = array_[position_left][position_right];
+                    }
+                     else if (score_left <= score_naname && score_left <= score_up && score > score_left) {
                         position_left = position_left;
                         position_right = position_right - 1;
-                        if (score > score_left) {
-                            seikai += right[position_right];
-                        }
+                        //if (score > score_left) {
+                          //  seikai += right[position_right];
+                        seikai += "left";
+                        seikai += " ";
+                        //if (score > score_left){
+                        //    seikai += right[position_right];
+                        //    seikai += " ";
+                       // }
+                        //}
                         score = array_[position_left][position_right];
-                    } else if (score_naname <= score_left && score_naname <= score_up && score >= score_naname) {
-                        position_left = position_left - 1;
-                        position_right = position_right - 1;
-                        if (score > score_naname) {
-                            seikai += right[position_right];
-                        }
-                        score = array_[position_left][position_right];
-                    } else {
+                    }
+                else if (score_up <= score_naname && score_up <= score_left && score > score_up) {
+                          position_left = position_left - 1;
+                          position_right = position_right;
+                          //  if (score > score_up) {
+                          //      seikai += right[position_right - 1];
+                          seikai += "up";
+                          seikai += " ";
+                          //if( score > score_up){
+                          //    seikai += right[position_right-1];
+                          //    seikai += " ";
+                          // }
+                      }
+                      else {
 
                     }
 
@@ -129,7 +181,7 @@ public class ResultActivity extends AppCompatActivity {
         // String left = "";
         Levenstein_distance LD = new Levenstein_distance();
         String distance = LD.LevensteinDistance(left, right);
-        //textView.setText(distance);
+        textView.setText(distance);
 
         //String  ca = String.valueOf(LD.LevensteinDistance(left,right));
         //textView.setText(ca);
@@ -172,7 +224,7 @@ public class ResultActivity extends AppCompatActivity {
         //    }
 
         String[] distance_tango = distance.split("", -1);
-        textView.setText(message);
+        //textView.setText(message);
         //if (answer != "") {
       //  String[] distance_tango = distance.split("", -1);
       SpannableStringBuilder ssb = new SpannableStringBuilder(message);
@@ -181,7 +233,7 @@ public class ResultActivity extends AppCompatActivity {
                 int index = message.indexOf(distance_tango[j]);
                 if( index != 0) {
                     ssb.setSpan(new ForegroundColorSpan(spanColor), index, index + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    textView.setText(ssb);
+          //          textView.setText(ssb);
                 }
             }
         }
