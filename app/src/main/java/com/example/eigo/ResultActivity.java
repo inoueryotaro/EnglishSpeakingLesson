@@ -30,14 +30,14 @@ public class ResultActivity extends AppCompatActivity {
         final TextView textView = findViewById(R.id.text_view5);
         //データを受け取る
         Intent intent1 = getIntent();
-        //String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        String message = "applet is god";
+        String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        //String message = "aka is";
         //受け取った文章を単語に分割する
         message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", -1);
 
         // EditTextからテキストを取得
-        String mondaibun = "apple is good";
+        String mondaibun = "recycling is becoming common in people's daily lives";
         String[] tango = mondaibun.split(" ", -1);
         String answer = "";
         int count = 0;
@@ -245,7 +245,7 @@ public class ResultActivity extends AppCompatActivity {
                 index_blank = Integer.parseInt(blank_position_index[i]);
                 for (int j = 0; j < distance_position_index.length - 1; j++) {
                     index_distance = Integer.parseInt(distance_position_index[j]);
-                    if (index_blank > index_distance && index < index_distance) {
+                    if (index_blank > index_distance && index <= index_distance) {
                         ssb.setSpan(new ForegroundColorSpan(spanColor), index, index_blank - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         textView.setText(ssb);
                         break;
@@ -290,11 +290,11 @@ public class ResultActivity extends AppCompatActivity {
 
             TextView textview2 = findViewById(R.id.resultLabel);
             //textview2.setText(ca2);
-            //if (mondaibun.equals(message)) {
-            //   textview2.setText("正解です!");
-            //} else {
-            //   textview2.setText("不正解です！");
-            //}
+            if (mondaibun.equals(message)) {
+               textview2.setText("正解です!");
+            } else {
+               textview2.setText("不正解です！");
+            }
 
             Button button = findViewById(R.id.back_button);
             button.setOnClickListener(new View.OnClickListener() {
