@@ -30,14 +30,14 @@ public class ResultActivity extends AppCompatActivity {
         final TextView textView = findViewById(R.id.text_view5);
         //データを受け取る
         Intent intent1 = getIntent();
-        String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        //String message = "aka is";
+        //String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        String message = "you should not";
         //受け取った文章を単語に分割する
         message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", -1);
 
         // EditTextからテキストを取得
-        String mondaibun = "recycling is becoming common in people's daily lives";
+        String mondaibun = "thou shalt not";
         String[] tango = mondaibun.split(" ", -1);
         String answer = "";
         int count = 0;
@@ -245,7 +245,12 @@ public class ResultActivity extends AppCompatActivity {
                 index_blank = Integer.parseInt(blank_position_index[i]);
                 for (int j = 0; j < distance_position_index.length - 1; j++) {
                     index_distance = Integer.parseInt(distance_position_index[j]);
-                    if (index_blank > index_distance && index <= index_distance) {
+                    if (index_blank > index_distance && index < index_distance) {
+                        ssb.setSpan(new ForegroundColorSpan(spanColor), index, index_blank - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        textView.setText(ssb);
+                        break;
+                    }
+                    if( index_distance == 0 && index_blank > index_distance && index <= index_distance){
                         ssb.setSpan(new ForegroundColorSpan(spanColor), index, index_blank - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         textView.setText(ssb);
                         break;
