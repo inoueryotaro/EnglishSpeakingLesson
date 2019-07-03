@@ -31,13 +31,13 @@ public class ResultActivity extends AppCompatActivity {
         //データを受け取る
         Intent intent1 = getIntent();
         //String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        String message = "you should not";
+        String message = "recycling is coming";
         //受け取った文章を単語に分割する
         message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", -1);
 
         // EditTextからテキストを取得
-        String mondaibun = "thou shalt not";
+        String mondaibun = "recycling is becoming";
         String[] tango = mondaibun.split(" ", -1);
         String answer = "";
         int count = 0;
@@ -136,6 +136,8 @@ public class ResultActivity extends AppCompatActivity {
                             position_right = position_right - 1;
                             if (score > score_naname) {
                                 // seikai += right[position_right];
+                                seikai += String.valueOf(position_left + 1);
+                                seikai += " ";
                                 seikai += String.valueOf(position_right + 1);
                                 //seikai += "naname";
                                 seikai += " ";
@@ -146,6 +148,8 @@ public class ResultActivity extends AppCompatActivity {
                             position_left = position_left;
                             position_right = position_right - 1;
                             if (score > score_left) {
+                                seikai += String.valueOf(position_left);
+                                seikai += " ";
                                 seikai += String.valueOf(position_right + 1);
                                 //  seikai += right[position_right];
                                 //seikai += "left";
@@ -157,6 +161,8 @@ public class ResultActivity extends AppCompatActivity {
                             position_left = position_left - 1;
                             position_right = position_right;
                             if (score > score_up) {
+                                seikai += String.valueOf(position_left + 1);
+                                seikai += " ";
                                 seikai += String.valueOf(position_right);
                                 //      seikai += right[position_right - 1];
                                 //seikai += "up";
@@ -233,7 +239,8 @@ public class ResultActivity extends AppCompatActivity {
             String[] distance_position = distance.split(",", -1);
             String[] distance_position_index = distance_position[0].split(" ", -1);
             String[] blank_position_index = distance_position[1].split(" ", -1);
-            textView.setText(message);
+            //textView.setText(distance_position[0]);
+           textView.setText(message);
             int index = 0;
             SpannableStringBuilder ssb = new SpannableStringBuilder(message);
             int index_blank = 0;
@@ -241,9 +248,12 @@ public class ResultActivity extends AppCompatActivity {
             //index_blank = Integer.parseInt(blank_position_index[0]);
             //  index_distance = Integer.parseInt(distance_position_index[0]);
             //textView.setText(String.valueOf(index_distance));
+            String left_position = "";
+            int sign = 0;
+            int same_index=0;
             for (int i = 0; i < blank_position_index.length - 1; i++) {
                 index_blank = Integer.parseInt(blank_position_index[i]);
-                for (int j = 0; j < distance_position_index.length - 1; j++) {
+                for (int j = 1; j < distance_position_index.length - 1; j = j+ 2) {
                     index_distance = Integer.parseInt(distance_position_index[j]);
                     if (index_blank > index_distance && index < index_distance) {
                         ssb.setSpan(new ForegroundColorSpan(spanColor), index, index_blank - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -259,10 +269,59 @@ public class ResultActivity extends AppCompatActivity {
                         ssb.setSpan(new ForegroundColorSpan(spanColor), index_blank - 1, message.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         textView.setText(ssb);
                     }
+                    else if( index_blank == index_distance){
+                        same_index = index_blank;
+                        left_position += distance_position_index[j-1];
+                        left_position += " ";
+                    }
+
                 }
                 index = index_blank;
 
             }
+            //textView.setText(left_position);
+            String[] left_array_index = left_position.split(" ",-1);
+            for( int h = 0; h < left_array_index.length-1; h++) {
+                String c1 = String.valueOf(mondaibun.charAt(Integer.parseInt(left_array_index[h]) - 1));
+                //textView.setText(c1);
+                if( c1.equals(" ")){
+                    sign++;
+                }
+                else{
+
+                }
+            }
+            int max = 0;
+            for( int i = 0; i < blank_position_index.length-1; i++){
+                if( max < Integer.parseInt(blank_position_index[i])){
+                    max = Integer.parseInt(blank_position_index[i]);
+                }
+            }
+            //textView.setText(String.valueOf(sign));
+            String index1 = "";
+            int count2= 0;
+            if( sign == 0){
+                for( int i = 0; i < blank_position_index.length-1; i++){
+                    if( same_index == Integer.parseInt(blank_position_index[i])  && max > same_index){
+                         index1 = blank_position_index[i+1];
+                         count2++;
+                         //textView.setText(index1);
+                        break;
+                    }
+
+                }
+               // ssb.setSpan(new ForegroundColorSpan(spanColor), same_index, Integer.parseInt(index1), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+               // textView.setText(ssb);
+                if(count2 == 0){
+                   ssb.setSpan(new ForegroundColorSpan(spanColor), same_index, message.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    textView.setText(ssb);
+                }
+                else{
+                     ssb.setSpan(new ForegroundColorSpan(spanColor), same_index, Integer.parseInt(index1)-1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    textView.setText(ssb);
+                }
+            }
+
         }
         else{
             if(mondaibun.equals(message)){
