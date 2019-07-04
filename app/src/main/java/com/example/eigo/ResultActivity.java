@@ -31,14 +31,14 @@ public class ResultActivity extends AppCompatActivity {
         //データを受け取る
         Intent intent1 = getIntent();
         //String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        String message = "cycling is coming";
+        String message = "cycling is coming common in";
         //受け取った文章を単語に分割する
         message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", 0);
         //textView.setText(String.valueOf(messagetango.length));
 
         // EditTextからテキストを取得
-        String mondaibun = "recycling is becoming";
+        String mondaibun = "recycling is becoming common in";
         String[] tango = mondaibun.split(" ", -1);
         String answer = "";
         int spanColor = Color.RED;
@@ -142,12 +142,12 @@ public class ResultActivity extends AppCompatActivity {
                             position_left = position_left - 1;
                             position_right = position_right;
                             if (score > score_up) {
-                                seikai += String.valueOf(position_left + 1);
-                                seikai += " ";
-                                seikai += String.valueOf(position_right);
+             //                   seikai += String.valueOf(position_left + 1);
+             //                   seikai += " ";
+             //                   seikai += String.valueOf(position_right);
                                 //      seikai += right[position_right - 1];
                                 //seikai += "up";
-                                seikai += " ";
+             //                   seikai += " ";
                             }
                         } else {
 
@@ -174,32 +174,27 @@ public class ResultActivity extends AppCompatActivity {
 
 
             String[] distance_position_index = distance.split(" ", -1);
-            //textView.setText(distance_position_index[2]);
-   //         String[] distance_position_index = distance_position[0].split(" ", -1);
-    //        String[] blank_position_index = distance_position[1].split(" ", -1);
                 textView.setText(message);
-    //        int index = 0;
+
             String index = "";
             SpannableStringBuilder ssb = new SpannableStringBuilder(message);
             int trial = distance_position_index.length / 2;
             for( int i = 1; i < 1 + 2 * trial; i = i + 2){
-                   index += distance_position_index[i];
+                  index += distance_position_index[i];
                    index += " ";
             }
             String[] distance_right_index = index.split(" ",0);
             int place = 10000;
             String red_tango = "";
-            String black_tango = "";
             int red = 10000;
-            int black = 10000;
+            int red_tango_length = 0;
             for( int i = 0; i < trial; i++) {
                 place = Integer.parseInt(distance_right_index[i]);
                 red_tango += messagetango[place-1];
-                 red = message.indexOf(red_tango);
-                 if( place != messagetango.length) {
-                     black_tango += messagetango[place];
-                     black = message.indexOf(black_tango);
-                     ssb.setSpan(new ForegroundColorSpan(spanColor), red, black - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                red = message.indexOf(red_tango);
+                red_tango_length = red_tango.length();
+                if( place != messagetango.length) {
+                     ssb.setSpan(new ForegroundColorSpan(spanColor), red, red + red_tango_length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                      textView.setText(ssb);
                  }
                  else{
@@ -207,83 +202,9 @@ public class ResultActivity extends AppCompatActivity {
                      textView.setText(ssb);
                  }
                 red_tango = "";
-                black_tango = "";
             }
 
-   //         int index_blank = 0;
-    //        int index_distance = 0;
-    //        String left_position = "";
-    //        int sign = 0;
-    //        int same_index = 0;
-    //        for (int i = 0; i < blank_position_index.length - 1; i++) {
-     //           index_blank = Integer.parseInt(blank_position_index[i]);
-      //          for (int j = 1; j < distance_position_index.length - 1; j = j+ 2) {
-      //              index_distance = Integer.parseInt(distance_position_index[j]);
-      //              if (index_blank > index_distance && index < index_distance) {
-        //                ssb.setSpan(new ForegroundColorSpan(spanColor), index, index_blank - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-             //           textView.setText(ssb);
-        //                break;
-          //          }
-         //           if( index_distance == 0 && index_blank > index_distance && index <= index_distance){
-          //              ssb.setSpan(new ForegroundColorSpan(spanColor), index, index_blank - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-               //         textView.setText(ssb);
-          //              break;
-           //         }
-            //        if (i == blank_position_index.length - 2 && index_blank < index_distance) {
-             //           ssb.setSpan(new ForegroundColorSpan(spanColor), index_blank - 1, message.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                 //       textView.setText(ssb);
-             //       }
-            //        else if( index_blank == index_distance){
-             //           same_index = index_blank;
-             //           left_position += distance_position_index[j-1];
-               //         left_position += " ";
-             //       }
 
-            //    }
-            //    index = index_blank;
-
-         //   }
-
-        //    String[] left_array_index = left_position.split(" ",-1);
-        //    for( int h = 0; h < left_array_index.length-1; h++) {
-         //       String c1 = String.valueOf(mondaibun.charAt(Integer.parseInt(left_array_index[h]) - 1));
-         //
-         //       if( c1.equals(" ")){
-         //           sign++;
-         //       }
-         //       else{
-
-         //       }
-         //   }
-        //    int max = 0;
-        //    for( int i = 0; i < blank_position_index.length-1; i++){
-        //        if( max < Integer.parseInt(blank_position_index[i])){
-        //            max = Integer.parseInt(blank_position_index[i]);
-        //        }
-        //    }
-
-      //      String index1 = "";
-      //      int count2= 0;
-      //      if( sign == 0){
-        //        for( int i = 0; i < blank_position_index.length-1; i++){
-         //           if( same_index == Integer.parseInt(blank_position_index[i])  && max > same_index){
-          //               index1 = blank_position_index[i+1];
-            //             count2++;
-                         //textView.setText(index1);
-            //            break;
-              //      }
-
-          //      }
-               // ssb.setSpan(new ForegroundColorSpan(spanColor), same_index, Integer.parseInt(index1), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-               // textView.setText(ssb);
-         //       if(count2 == 0){
-          //         ssb.setSpan(new ForegroundColorSpan(spanColor), same_index, message.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                   // textView.setText(ssb);
-        //        }
-       //         else{
-         //            ssb.setSpan(new ForegroundColorSpan(spanColor), same_index, Integer.parseInt(index1)-1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    //textView.setText(ssb);
-           //     }
             }
 
 
