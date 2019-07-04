@@ -31,13 +31,13 @@ public class ResultActivity extends AppCompatActivity {
         //データを受け取る
         Intent intent1 = getIntent();
         //String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        String message = "recycling is coming";
+        String message = "recycling is becoming common in people's daily lives";
         //受け取った文章を単語に分割する
         message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", -1);
 
         // EditTextからテキストを取得
-        String mondaibun = "recycling is becoming";
+        String mondaibun = "recycling is becoming common in people's daily lives";
         String[] tango = mondaibun.split(" ", -1);
         String answer = "";
         int count = 0;
@@ -320,6 +320,9 @@ public class ResultActivity extends AppCompatActivity {
                      ssb.setSpan(new ForegroundColorSpan(spanColor), same_index, Integer.parseInt(index1)-1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     textView.setText(ssb);
                 }
+            }
+            if( mondaibun.equals(message)){
+                textView.setText(message);
             }
 
         }
