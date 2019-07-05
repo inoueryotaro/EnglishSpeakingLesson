@@ -33,7 +33,7 @@ public class ResultActivity extends AppCompatActivity {
         //String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
         String message = "cycling is coming common in";
         //受け取った文章を単語に分割する
-        message = message.replaceAll(",", "");
+       message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", 0);
         //textView.setText(String.valueOf(messagetango.length));
 
@@ -116,26 +116,20 @@ public class ResultActivity extends AppCompatActivity {
                             position_left = position_left - 1;
                             position_right = position_right - 1;
                             if (score > score_naname) {
-                                // seikai += right[position_right];
-                               seikai += String.valueOf(position_left + 1);
-                                seikai += " ";
+                          //     seikai += String.valueOf(position_left + 1);
+                          //      seikai += " ";
                                 seikai += String.valueOf(position_right + 1);
-                                //seikai += "naname";
                                 seikai += " ";
                             }
-                            //}
                             score = array_[position_left][position_right];
                        } else if (score_left <= score_naname && score_left <= score_up && score > score_left) {
                             position_left = position_left;
                             position_right = position_right - 1;
                             if (score > score_left) {
-                                seikai += String.valueOf(position_left);
-                                seikai += " ";
+                         //      seikai += String.valueOf(position_left);
+                         //       seikai += " ";
                                 seikai += String.valueOf(position_right + 1);
-                                //  seikai += right[position_right];
-                                //seikai += "left";
                                 seikai += " ";
-
                             }
                             score = array_[position_left][position_right];
                         } else if (score_up <= score_naname && score_up <= score_left && score > score_up) {
@@ -145,8 +139,6 @@ public class ResultActivity extends AppCompatActivity {
              //                   seikai += String.valueOf(position_left + 1);
              //                   seikai += " ";
              //                   seikai += String.valueOf(position_right);
-                                //      seikai += right[position_right - 1];
-                                //seikai += "up";
              //                   seikai += " ";
                             }
                         } else {
@@ -154,11 +146,6 @@ public class ResultActivity extends AppCompatActivity {
                         }
 
                     }
-
-                    //textView.setText(String.valueOf(array_[left.length-1][right.length-1]));
-
-                    //double max_string_num = Math.max(array_left.length(), array_right.length());
-                    //double normalized_LD = array_[array_left.length()][array_right.length()];
                     return seikai;
                 }
 
@@ -173,39 +160,28 @@ public class ResultActivity extends AppCompatActivity {
             String distance = LD.LevensteinDistance(left, right);
 
 
-            String[] distance_position_index = distance.split(" ", -1);
+           // String[] distance_position_index = distance.split(" ", 0);
                 textView.setText(message);
-
-            String index = "";
             SpannableStringBuilder ssb = new SpannableStringBuilder(message);
-            int trial = distance_position_index.length / 2;
-            for( int i = 1; i < 1 + 2 * trial; i = i + 2){
-                  index += distance_position_index[i];
-                   index += " ";
-            }
-            String[] distance_right_index = index.split(" ",0);
+            //int trial = distance_position_index.length / 2;
+            String[] distance_right_index = distance.split(" ",0);
             int place = 10000;
             String red_tango = "";
-            int red = 10000;
+            int red_index = 10000;
             int red_tango_length = 0;
-            for( int i = 0; i < trial; i++) {
+            for( int i = 0; i < distance_right_index.length; i++) {
                 place = Integer.parseInt(distance_right_index[i]);
                 red_tango += messagetango[place-1];
-                red = message.indexOf(red_tango);
+                red_index = message.indexOf(red_tango);
                 red_tango_length = red_tango.length();
-                if( place != messagetango.length) {
-                     ssb.setSpan(new ForegroundColorSpan(spanColor), red, red + red_tango_length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        //        if( place != messagetango.length) {
+                     ssb.setSpan(new ForegroundColorSpan(spanColor), red_index, red_index + red_tango_length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                      textView.setText(ssb);
-                 }
-                 else{
-                     ssb.setSpan(new ForegroundColorSpan(spanColor), red,message.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                     textView.setText(ssb);
-                 }
+        //         }
                 red_tango = "";
             }
 
-
-            }
+        }
 
 
         else{
@@ -220,26 +196,8 @@ public class ResultActivity extends AppCompatActivity {
             }
         }
 
-        //if (answer != "") {
-      //  String[] distance_tango = distance.split("", -1);
-      //index_distance = new int[distance_position_index.length];
-     // for( int i = 0; i < distance_position_index.length-1; i++){
-     //     index_distance[i] = Integer.parseInt(distance_position_index[i]);
-      //}
-        //    textView.setText(String.valueOf(index_distance[0]));
-       // for (int j = 1; j < distance_tango.length; j++) {
-        //    if (message.contains(distance_tango[j])) {
-        //        int index = message.indexOf(distance_tango[j]);
-        //        if( index != 0) {
-        //
-          //      }
-         //   }
-        //}
-
-
-            TextView textview2 = findViewById(R.id.resultLabel);
-            //textview2.setText(ca2);
-            if (mondaibun.equals(message)) {
+        TextView textview2 = findViewById(R.id.resultLabel);
+        if (mondaibun.equals(message)) {
                textview2.setText("正解です!");
             } else {
                textview2.setText("不正解です！");
