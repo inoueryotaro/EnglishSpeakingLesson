@@ -30,15 +30,15 @@ public class ResultActivity extends AppCompatActivity {
         final TextView textView = findViewById(R.id.text_view5);
         //データを受け取る
         Intent intent1 = getIntent();
-        //String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        String message = "cycling is coming common on";
+        String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
+       // String message = "recycling is becoming common in";
         //受け取った文章を単語に分割する
        message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", 0);
         //textView.setText(String.valueOf(messagetango.length));
 
         // EditTextからテキストを取得
-        String mondaibun = "recycling is becoming common in";
+        String mondaibun = "recycling is becoming common in people's daily lives";
         String[] tango = mondaibun.split(" ", -1);
         String answer = "";
         int spanColor = Color.RED;
@@ -159,29 +159,28 @@ public class ResultActivity extends AppCompatActivity {
             Levenstein_distance LD = new Levenstein_distance();
             String distance = LD.LevensteinDistance(left, right);
 
-
-           // String[] distance_position_index = distance.split(" ", 0);
-                textView.setText(message);
-            SpannableStringBuilder ssb = new SpannableStringBuilder(message);
-            //int trial = distance_position_index.length / 2;
-            String[] distance_right_index = distance.split(" ",0);
-            int place = 10000;
-            String red_tango = "";
-            int red_index = 10000;
-            int red_tango_length = 0;
-            int distance_to_red_tango = 0;
-            for( int i = 0; i < distance_right_index.length; i++) {
-                place = Integer.parseInt(distance_right_index[i]);
-                red_tango += messagetango[place-1];
-                for( int j = 0; j < place-1; j++){
-                    distance_to_red_tango = distance_to_red_tango + messagetango[j].length() + 1;
+            textView.setText(message);
+            if( distance.length() != 0) {
+                SpannableStringBuilder ssb = new SpannableStringBuilder(message);
+                String[] distance_right_index = distance.split(" ", 0);
+                int place = 10000;
+                String red_tango = "";
+                int red_index = 10000;
+                int red_tango_length = 0;
+                int distance_to_red_tango = 0;
+                for (int i = 0; i < distance_right_index.length; i++) {
+                    place = Integer.parseInt(distance_right_index[i]);
+                    red_tango += messagetango[place - 1];
+                    for (int j = 0; j < place - 1; j++) {
+                        distance_to_red_tango = distance_to_red_tango + messagetango[j].length() + 1;
+                    }
+                    red_index = message.indexOf(red_tango, distance_to_red_tango);
+                    red_tango_length = red_tango.length();
+                    ssb.setSpan(new ForegroundColorSpan(spanColor), red_index, red_index + red_tango_length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    textView.setText(ssb);
+                    red_tango = "";
+                    distance_to_red_tango = 0;
                 }
-                red_index = message.indexOf(red_tango,distance_to_red_tango);
-                red_tango_length = red_tango.length();
-                     ssb.setSpan(new ForegroundColorSpan(spanColor), red_index, red_index + red_tango_length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                     textView.setText(ssb);
-                red_tango = "";
-                distance_to_red_tango = 0;
             }
 
         }
