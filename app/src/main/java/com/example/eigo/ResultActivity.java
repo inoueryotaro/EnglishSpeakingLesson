@@ -31,7 +31,7 @@ public class ResultActivity extends AppCompatActivity {
         //データを受け取る
         Intent intent1 = getIntent();
         //String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        String message = "cycling is coming common in";
+        String message = "cycling is coming common on";
         //受け取った文章を単語に分割する
        message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", 0);
@@ -169,16 +169,19 @@ public class ResultActivity extends AppCompatActivity {
             String red_tango = "";
             int red_index = 10000;
             int red_tango_length = 0;
+            int distance_to_red_tango = 0;
             for( int i = 0; i < distance_right_index.length; i++) {
                 place = Integer.parseInt(distance_right_index[i]);
                 red_tango += messagetango[place-1];
-                red_index = message.indexOf(red_tango);
+                for( int j = 0; j < place-1; j++){
+                    distance_to_red_tango = distance_to_red_tango + messagetango[j].length() + 1;
+                }
+                red_index = message.indexOf(red_tango,distance_to_red_tango);
                 red_tango_length = red_tango.length();
-        //        if( place != messagetango.length) {
                      ssb.setSpan(new ForegroundColorSpan(spanColor), red_index, red_index + red_tango_length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                      textView.setText(ssb);
-        //         }
                 red_tango = "";
+                distance_to_red_tango = 0;
             }
 
         }
