@@ -42,7 +42,6 @@ public class ResultActivity extends AppCompatActivity {
         String[] tango = mondaibun.split(" ", -1);
         String answer = "";
         int spanColor = Color.RED;
-        if(messagetango.length >= 2) {
             class Levenstein_distance {
                 String LevensteinDistance(String array_left, String array_right) {
                     String blank = "-";
@@ -183,20 +182,11 @@ public class ResultActivity extends AppCompatActivity {
                 }
             }
 
-        }
 
 
-        else{
-            if(mondaibun.equals(message)){
-                textView.setText(message);
-            }
-            else{
-                textView.setText(message);
-                SpannableStringBuilder ssb2 = new SpannableStringBuilder(message);
-                ssb2.setSpan(new ForegroundColorSpan(spanColor), 0,message.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                textView.setText(ssb2);
-            }
-        }
+
+
+
 
         TextView textview2 = findViewById(R.id.resultLabel);
         if (mondaibun.equals(message)) {

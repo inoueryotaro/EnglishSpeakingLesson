@@ -7,60 +7,41 @@
     tools:context=".LevelActivity">
 
 
-    <ScrollView
-        android:layout_width="420dp"
-        android:layout_height="747dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/level1_button"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="30dp"
+        android:text="LEVEL1      中学１年生レベル"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="1">
+    <Button
+        android:id="@+id/level2_button"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:text="LEVEL2      中学２年生レベル"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@+id/level1_button"
+        app:layout_constraintStart_toStartOf="@+id/level1_button"
+        app:layout_constraintTop_toBottomOf="@+id/level1_button" />
 
-            <Button
-                android:id="@+id/level1_button"
-                android:layout_width="200dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="110dp"
-                android:layout_marginTop="200dp"
-                android:text="LEVEL1      中学１年生レベル"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteY="109dp" />
+    <Button
+        android:id="@+id/level3_button"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:text="LEVEL3      中学３年生レベル"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@+id/level2_button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/level2_button"
+        app:layout_constraintTop_toBottomOf="@+id/level2_button" />
 
-            <Button
-                android:id="@+id/level2_button"
-                android:layout_width="200dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="110dp"
-                android:layout_marginTop="200dp"
-                android:text="LEVEL2      中学２年生レベル"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteY="109dp" />
 
-            <Button
-                android:id="@+id/level3_button"
-                android:layout_width="200dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="110dp"
-                android:layout_marginTop="300dp"
-                android:text="LEVEL3      中学３年生レベル"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteY="109dp" />
-        </LinearLayout>
-    </ScrollView>
 </android.support.constraint.ConstraintLayout>

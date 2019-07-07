@@ -21,7 +21,7 @@ public class LevelActivity extends AppCompatActivity {
             }
 
             private void start() {
-                Intent intent = new Intent(getApplication(), MainActivity.class);
+                Intent intent = new Intent(getApplication(), MenuActivity.class);
                 startActivity(intent);
             }
         });
