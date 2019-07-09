@@ -30,12 +30,13 @@ public class ResultActivity extends AppCompatActivity {
         String[] messagetango = message.split(" ", 0);
         //textView.setText(String.valueOf(messagetango.length));
         Button button2 = findViewById(R.id.next_button);
-        final String finalMessage = message;
+     //   final String finalMessage = message;
+        final int data= 1;
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent(getApplication(), MenuActivity.class);
-                intent2.putExtra("keyword", finalMessage);
+                intent2.putExtra("keyword", data);
                 startActivity(intent2);
             }
         });

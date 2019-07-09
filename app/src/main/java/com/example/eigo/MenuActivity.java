@@ -1,6 +1,5 @@
 package com.example.eigo;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -44,11 +43,11 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-                 Intent intent2 = getIntent();
-            String data = intent2.getStringExtra("keyword");
 
-            int sign = 0;
-            if( sign == 0 ){
+        Intent intent2 = getIntent();
+            int data = intent2.getIntExtra("keyword",0);
+
+            if( data == 1 ){
                 iv.setImageResource(R.drawable.check_picture);
             }
             else{
