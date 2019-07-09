@@ -19,14 +19,7 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        Button button2 = findViewById(R.id.yomiage_button);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent(getApplication(), ResultActivity2.class);
-                startActivity(intent2);
-            }
-        });
+
         final TextView textView = findViewById(R.id.text_view5);
         //データを受け取る
         Intent intent1 = getIntent();
@@ -36,6 +29,16 @@ public class ResultActivity extends AppCompatActivity {
        message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", 0);
         //textView.setText(String.valueOf(messagetango.length));
+        Button button2 = findViewById(R.id.yomiage_button);
+        final String finalMessage = message;
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(getApplication(), MenuActivity.class);
+                intent2.putExtra("keyword", finalMessage);
+                startActivity(intent2);
+            }
+        });
 
         // EditTextからテキストを取得
         String mondaibun = "recycling is becoming common in people's daily lives";
