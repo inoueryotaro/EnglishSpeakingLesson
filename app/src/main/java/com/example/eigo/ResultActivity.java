@@ -29,7 +29,7 @@ public class ResultActivity extends AppCompatActivity {
        message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", 0);
         //textView.setText(String.valueOf(messagetango.length));
-        Button button2 = findViewById(R.id.yomiage_button);
+        Button button2 = findViewById(R.id.next_button);
         final String finalMessage = message;
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
