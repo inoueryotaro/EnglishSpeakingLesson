@@ -24,7 +24,7 @@ public class ResultActivity extends AppCompatActivity {
         //データを受け取る
         Intent intent1 = getIntent();
         String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
-       // String message = "recycling is becoming common in";
+       // String message = "recycling is becoming in people's daily lives";
         //受け取った文章を単語に分割する
        message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", 0);
@@ -43,7 +43,7 @@ public class ResultActivity extends AppCompatActivity {
 
         // EditTextからテキストを取得
         String mondaibun = "recycling is becoming common in people's daily lives";
-        String[] tango = mondaibun.split(" ", -1);
+        String[] tango = mondaibun.split(" ", 0);
         String answer = "";
         int spanColor = Color.RED;
             class Levenstein_distance {
@@ -173,22 +173,48 @@ public class ResultActivity extends AppCompatActivity {
                 int distance_to_red_tango = 0;
                 for (int i = 1; i < distance_index.length; i = i + 2) {
                     place = Integer.parseInt(distance_index[i]);
-                    red_tango += messagetango[place - 1];
-                    for (int j = 0; j < place - 1; j++) {
-                        distance_to_red_tango = distance_to_red_tango + messagetango[j].length() + 1;
+                    if( place >= 0) {
+                        red_tango += messagetango[place - 1];
+                        for (int j = 0; j < place - 1; j++) {
+                            distance_to_red_tango = distance_to_red_tango + messagetango[j].length() + 1;
+                        }
+                        red_index = message.indexOf(red_tango, distance_to_red_tango);
+                        red_tango_length = red_tango.length();
+                        ssb.setSpan(new ForegroundColorSpan(spanColor), red_index, red_index + red_tango_length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        textView.setText(ssb);
+                        red_tango = "";
+                        distance_to_red_tango = 0;
                     }
-                    red_index = message.indexOf(red_tango, distance_to_red_tango);
-                    red_tango_length = red_tango.length();
-                    ssb.setSpan(new ForegroundColorSpan(spanColor), red_index, red_index + red_tango_length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    textView.setText(ssb);
-                    red_tango = "";
-                    distance_to_red_tango = 0;
                 }
             }
 
 
             TextView textView3 = findViewById(R.id.seikaiLabel);
             textView3.setText(mondaibun);
+        if( distance.length() != 0) {
+            SpannableStringBuilder ssb = new SpannableStringBuilder(mondaibun);
+            String[] distance_index = distance.split(" ",0);
+            int place = 10000;
+            String red_tango = "";
+            int red_index = 10000;
+            int red_tango_length = 0;
+            int distance_to_red_tango = 0;
+            for (int i = 0; i < distance_index.length; i = i + 2) {
+                place = Integer.parseInt(distance_index[i]);
+                if( place >= 0) {
+                    red_tango += tango[place - 1];
+                    for (int j = 0; j < place - 1; j++) {
+                        distance_to_red_tango = distance_to_red_tango + tango[j].length() + 1;
+                    }
+                    red_index = mondaibun.indexOf(red_tango, distance_to_red_tango);
+                    red_tango_length = red_tango.length();
+                    ssb.setSpan(new ForegroundColorSpan(spanColor), red_index, red_index + red_tango_length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    textView3.setText(ssb);
+                    red_tango = "";
+                    distance_to_red_tango = 0;
+                }
+            }
+        }
 
 
 

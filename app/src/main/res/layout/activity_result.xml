@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/resultLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -56,5 +56,27 @@
         app:layout_constraintBottom_toTopOf="@+id/text_view5"
         app:layout_constraintEnd_toEndOf="@+id/text_view5"
         app:layout_constraintStart_toStartOf="@+id/text_view5" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="正解"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/seikaiLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="認識結果"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/text_view5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
