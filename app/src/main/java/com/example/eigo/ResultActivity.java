@@ -187,7 +187,8 @@ public class ResultActivity extends AppCompatActivity {
             }
 
 
-
+            TextView textView3 = findViewById(R.id.seikaiLabel);
+            textView3.setText(mondaibun);
 
 
 

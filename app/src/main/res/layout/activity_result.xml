@@ -20,7 +20,7 @@
         android:id="@+id/text_view5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="100dp"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/resultLabel"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,5 +45,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/seikaiLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="150dp"
+        android:text="TextView"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/text_view5"
+        app:layout_constraintEnd_toEndOf="@+id/text_view5"
+        app:layout_constraintStart_toStartOf="@+id/text_view5" />
 
 </android.support.constraint.ConstraintLayout>
