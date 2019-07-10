@@ -119,8 +119,8 @@ public class ResultActivity extends AppCompatActivity {
                             position_left = position_left - 1;
                             position_right = position_right - 1;
                             if (score > score_naname) {
-                          //     seikai += String.valueOf(position_left + 1);
-                          //      seikai += " ";
+                               seikai += String.valueOf(position_left + 1);
+                                seikai += " ";
                                 seikai += String.valueOf(position_right + 1);
                                 seikai += " ";
                             }
@@ -129,8 +129,8 @@ public class ResultActivity extends AppCompatActivity {
                             position_left = position_left;
                             position_right = position_right - 1;
                             if (score > score_left) {
-                         //      seikai += String.valueOf(position_left);
-                         //       seikai += " ";
+                               seikai += "-1";
+                                seikai += " ";
                                 seikai += String.valueOf(position_right + 1);
                                 seikai += " ";
                             }
@@ -139,10 +139,10 @@ public class ResultActivity extends AppCompatActivity {
                             position_left = position_left - 1;
                             position_right = position_right;
                             if (score > score_up) {
-             //                   seikai += String.valueOf(position_left + 1);
-             //                   seikai += " ";
-             //                   seikai += String.valueOf(position_right);
-             //                   seikai += " ";
+                                seikai += String.valueOf(position_left + 1);
+                                seikai += " ";
+                                seikai += "-1";
+                                seikai += " ";
                             }
                         } else {
 
@@ -165,14 +165,14 @@ public class ResultActivity extends AppCompatActivity {
             textView.setText(message);
             if( distance.length() != 0) {
                 SpannableStringBuilder ssb = new SpannableStringBuilder(message);
-                String[] distance_right_index = distance.split(" ", 0);
+                String[] distance_index = distance.split(" ",0);
                 int place = 10000;
                 String red_tango = "";
                 int red_index = 10000;
                 int red_tango_length = 0;
                 int distance_to_red_tango = 0;
-                for (int i = 0; i < distance_right_index.length; i++) {
-                    place = Integer.parseInt(distance_right_index[i]);
+                for (int i = 1; i < distance_index.length; i = i + 2) {
+                    place = Integer.parseInt(distance_index[i]);
                     red_tango += messagetango[place - 1];
                     for (int j = 0; j < place - 1; j++) {
                         distance_to_red_tango = distance_to_red_tango + messagetango[j].length() + 1;
