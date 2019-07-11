@@ -56,6 +56,8 @@ public class MenuActivity extends AppCompatActivity {
         SharedPreferences prefs11 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences prefs12 = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+
+
         Intent intent1 = getIntent();
         int data = intent1.getIntExtra("keyword",0);
         if(data == 1){
@@ -63,6 +65,11 @@ public class MenuActivity extends AppCompatActivity {
             editor.putInt("int", 1);
             editor.apply();
         }
+    //    else{
+    //        SharedPreferences.Editor editor = prefs.edit();
+    //        editor.putInt("int", 0);
+    //        editor.apply();
+    //    }
         Intent intent2 = getIntent();
         int data2 = intent2.getIntExtra("keyword2",0);
         if(data2 == 1){
@@ -140,7 +147,6 @@ public class MenuActivity extends AppCompatActivity {
             editor.putInt("int12", 1);
             editor.apply();
         }
-
 
         int intNum = prefs.getInt("int",0);
         if( intNum == 1){
