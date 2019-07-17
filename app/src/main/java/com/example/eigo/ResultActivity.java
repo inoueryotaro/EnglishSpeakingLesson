@@ -24,7 +24,7 @@ public class ResultActivity extends AppCompatActivity {
         //データを受け取る
         Intent intent1 = getIntent();
         String message = intent1.getStringExtra(MainActivity.EXTRA_MESSAGE);
-       //String message = "recycling is becoming common in people's daily lives";
+       //String message = "recycling is becoming come on in people's daily lives";
         //受け取った文章を単語に分割する
        message = message.replaceAll(",", "");
         String[] messagetango = message.split(" ", 0);
