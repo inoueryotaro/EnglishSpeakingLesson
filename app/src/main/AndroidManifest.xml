@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LevelActivity"></activity>
+        <activity android:name=".KenshoResultActivity"></activity>
+        <activity android:name=".KenshoActivity" />
+        <activity android:name=".LevelActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".ResultActivity2" />
         <activity android:name=".ResultActivity" />

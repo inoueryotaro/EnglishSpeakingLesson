@@ -31,15 +31,8 @@ public class ResultActivity extends AppCompatActivity {
         //textView.setText(String.valueOf(messagetango.length));
         Button button2 = findViewById(R.id.next_button);
      //   final String finalMessage = message;
-        final int data= 1;
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent(getApplication(), MenuActivity.class);
-                intent2.putExtra("keyword", data);
-                startActivity(intent2);
-            }
-        });
+     //   final int data= 1;
+
 
         // EditTextからテキストを取得
         String mondaibun = "recycling is becoming common in people's daily lives";
@@ -202,7 +195,7 @@ public class ResultActivity extends AppCompatActivity {
                 }
             }
 
-
+        String miss_tango = "";
             TextView textView3 = findViewById(R.id.seikaiLabel);
             textView3.setText(mondaibun);
         if( distance.length() != 0) {
@@ -215,6 +208,7 @@ public class ResultActivity extends AppCompatActivity {
             int red_tango_length = 0;
             int distance_to_red_tango = 0;
             int brue_sign = 0;
+
             for (int i = 0; i < distance_index.length; i = i + 2) {
                 place = Integer.parseInt(distance_index[i]);
                 place_right = Integer.parseInt(distance_index[i+1]);
@@ -236,6 +230,8 @@ public class ResultActivity extends AppCompatActivity {
                         ssb2.setSpan(new ForegroundColorSpan(spanColor2), red_index, red_index + red_tango_length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                         textView3.setText(ssb2);
                     }
+                    miss_tango += red_tango;
+                    miss_tango += " ";
                     red_tango = "";
                     distance_to_red_tango = 0;
                     brue_sign = 0;
@@ -248,11 +244,11 @@ public class ResultActivity extends AppCompatActivity {
 
         TextView textview2 = findViewById(R.id.resultLabel);
         if (mondaibun.equals(message)) {
-               textview2.setText("正解です!");
+              // textview2.setText("正解です!");
             } else {
-               textview2.setText("不正解です！");
+             //  textview2.setText("不正解です！");
             }
-
+            textview2.setText(miss_tango);
             Button button = findViewById(R.id.back_button);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -260,6 +256,16 @@ public class ResultActivity extends AppCompatActivity {
                     finish();
                 }
             });
+
+        final String finalMiss_tango = miss_tango;
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(getApplication(), KenshoActivity.class);
+                intent2.putExtra("miss", finalMiss_tango);
+                startActivity(intent2);
+            }
+        });
 
 
         }
