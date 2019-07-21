@@ -12,23 +12,25 @@ public class KenshoResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kensho_result);
 
-        TextView textView = findViewById(R.id.text);
+        final TextView textView = findViewById(R.id.text);
         TextView textView2 = findViewById(R.id.text2);
 
         Intent intent = getIntent();
         String data = intent.getStringExtra("kenshomondai");
         String data2 = intent.getStringExtra("kenshoresult");
 
-        textView.setText(data);
-        textView2.setText(data2);
+        //textView.setText(data);
+        //textView2.setText(data2);
         class Levenstein_distance {
             String LevensteinDistance(String array_left, String array_right) {
-                String blank = "-";
-                String  array_left2 = blank + array_left;
-                String  array_right2 = blank + array_right;
-                String[] left = array_left2.split("",0);
-                String[] right = array_right2.split("",0);
-                int array_[][] = new int[left.length][right.length];
+
+                String[] left = array_left.split("",0);
+                String[] right = array_right.split("",0);
+                //textView.setText(left[1]);
+                // 結果はaでした。
+                //textView.setText(left[6]);
+                //結果は、アプリが停止した。つまり、left[6]は存在しない。
+                int array_[][] = new int[left.length + 1][right.length + 1];
                 int x = 0;
                 int COST_DEL = 1;
                 int COST_INS = 1;
@@ -65,69 +67,17 @@ public class KenshoResultActivity extends AppCompatActivity {
 
                     }
                 }
-
-                int score_left = 0;
-                int score_up = 0;
-                int score_naname = 0;
-                int position_left = left.length-1;
-                int position_right = right.length-1;
-                int score = 0;
-                String seikai = "";
-                for (int i = 0; i < (left.length) * (right.length); i++) {
-                    if (position_left == 0 && position_right == 0) {
-                        break;
-                    } else if (position_left == 0) {
-                        score_naname = 10000;
-                        score_up = 10000;
-                        score_left = array_[position_left][position_right - 1];
-                    } else if (position_right == 0) {
-                        score_naname = 10000;
-                        score_left = 10000;
-                        score_up = array_[position_left - 1][position_right];
-                    } else {
-                        score_left = array_[position_left][position_right - 1];
-                        score_up = array_[position_left - 1][position_right];
-                        score_naname = array_[position_left - 1][position_right - 1];
-                    }
-                    score = array_[position_left][position_right];
-                    if (score_naname <= score_left && score_naname <= score_up && score >= score_naname) {
-                        position_left = position_left - 1;
-                        position_right = position_right - 1;
-                        if (score > score_naname) {
-                            seikai += String.valueOf(position_left + 1);
-                            seikai += " ";
-                            seikai += String.valueOf(position_right + 1);
-                            seikai += " ";
-                        }
-                        score = array_[position_left][position_right];
-                    } else if (score_left <= score_naname && score_left <= score_up && score > score_left) {
-                        position_left = position_left;
-                        position_right = position_right - 1;
-                        if (score > score_left) {
-                            seikai += "-1";
-                            seikai += " ";
-                            seikai += String.valueOf(position_right + 1);
-                            seikai += " ";
-                        }
-                        score = array_[position_left][position_right];
-                    } else if (score_up <= score_naname && score_up <= score_left && score > score_up) {
-                        position_left = position_left - 1;
-                        position_right = position_right;
-                        if (score > score_up) {
-                            seikai += String.valueOf(position_left + 1);
-                            seikai += " ";
-                            seikai += "-1";
-                            seikai += " ";
-                        }
-                    } else {
-
-                    }
-
-                }
-                return seikai;
+                return  array_left;
             }
-
         }
+
+        String right = "applet";//ゴジラ";
+        String left = "apple";//"キングゴジラ";
+        String right2;
+        // String right = "";
+        // String left = "";
+        Levenstein_distance LD = new Levenstein_distance();
+        String distance = LD.LevensteinDistance(left, right);
 
     }
 }
