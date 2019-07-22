@@ -155,7 +155,7 @@ public class ResultActivity extends AppCompatActivity {
             // String right = "";
             // String left = "";
             Levenstein_distance LD = new Levenstein_distance();
-            String distance = LD.LevensteinDistance(left, right);
+            final String distance = LD.LevensteinDistance(left, right);
             textView.setText(message);
             if( distance.length() != 0) {
                 SpannableStringBuilder ssb = new SpannableStringBuilder(message);
@@ -261,9 +261,15 @@ public class ResultActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(getApplication(), KenshoActivity.class);
-                intent2.putExtra("miss", finalMiss_tango);
-                startActivity(intent2);
+                if( distance.length() != 0) {
+                    Intent intent2 = new Intent(getApplication(), KenshoActivity.class);
+                    intent2.putExtra("miss", finalMiss_tango);
+                    startActivity(intent2);
+                }
+                else{
+                    Intent intent3 = new Intent(getApplication(),MenuActivity.class);
+                    startActivity(intent3);
+                }
             }
         });
 
