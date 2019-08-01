@@ -153,7 +153,7 @@ public class KenshoResultActivity extends AppCompatActivity {
             for (int i = 0; i < distance_index.length; i++) {
                 place = Integer.parseInt(distance_index[i]);
                 ssb.setSpan(new ForegroundColorSpan(spanColor), place-1,place,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                textView.setText(ssb);
+                //textView.setText(ssb);
 
 
             }
